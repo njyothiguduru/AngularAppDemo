@@ -15,7 +15,24 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'install @angular/cli -g'
+
+- task: Npm@2
+      inputs:
+        command: 'install'
+
+- task: Npm@3
+  inputs:
+    command: 'custom'
+    customCommand: 'run build'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Visual Studio Enterprise Subscription – MPN(7a5fbde9-06ff-4be0-9c65-e135e535abca)'
+    appType: 'webApp'
+    WebAppName: 'AngularPOCGrid'
+    packageForLinux: 'dist/AngularAppDemo/'
