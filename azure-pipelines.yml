@@ -38,3 +38,5 @@ steps:
     appType: 'webApp'
     WebAppName: 'AngularPOCGrid'
     packageForLinux: 'dist/AngularAppDemo/'
+
+- task: PublishBuildArtifacts@1
